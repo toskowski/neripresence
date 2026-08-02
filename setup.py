@@ -7,7 +7,7 @@ setup(
   description = 'Small and simple nerimity presence wrapper',   
   author = 'Tosiek',     
   url = 'https://github.com/toskowski/neripresence',   
-  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_01.tar.gz',    
+  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_02.tar.gz',    
   keywords = ['nerimity', 'presence' ],   
   install_requires=[            
           'websockets',
