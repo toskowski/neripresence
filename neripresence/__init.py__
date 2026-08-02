@@ -1,1 +1,3 @@
-from neripresence.presence import Client
+from .presence import Client
+
+__all__ = ["Client"]
