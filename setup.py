@@ -8,7 +8,7 @@ setup(
   author = 'Tosiek',                   
   author_email = 'orzechowymastermind@proton.me',      
   url = 'https://github.com/toskowski/neripresence',   
-  download_url = 'https://github.com/toskowski/neripresence/BLEHHH',    
+  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_01.tar.gz',    
   keywords = ['nerimity', 'presence' ],   
   install_requires=[            
           'websockets',
