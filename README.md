@@ -51,7 +51,8 @@ client.start() # starts a connection with nerimity
 while  True: # infinite loop
 
   try: # trying to run the program
-  # setting two random values and a operator
+
+    # setting two random values and a operator
     A = randint(1,100)
     B = randint(1,100)
     operator = choice(["+","-","*","/"])
