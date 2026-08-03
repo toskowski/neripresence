@@ -110,9 +110,10 @@ as per [nerimity docs](https://docs.nerimity.com/rpc) only the `name` argument i
 ```
 notable arguments:
 
-`link` - is the link that the user gets redirected to when clicking the title
-`imgSrc` - should be a valid link to an image
-`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence, both values need to be **unix timestamp in miliseconds**
+`link` - is the link that the user gets redirected to when clicking the title  
+`imgSrc` - should be a valid link to an image  
+`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence,  
+both values need to be **unix timestamp in miliseconds**
 
 ## Client.clear()
 This method clears the presence without closing the connection
@@ -120,5 +121,6 @@ This method clears the presence without closing the connection
 ## Client.close()
 This method closes the connection and frees the socket
 
-Good practice is to always make sure that the connection is properly closed before stopping the program, as that could lead to some connection issues later on.
+Good practice is to always make sure that the connection is properly closed before stopping the program,  
+as that could lead to some connection issues later on.
 
