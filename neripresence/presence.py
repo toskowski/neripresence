@@ -43,6 +43,14 @@ class Client():
 
         asyncio.run_coroutine_threadsafe(self._push(json_step),self._loop)
 
+    def clear(self):
+        nulled = {
+            "name": 'UPDATE_RPC',
+            "data": None
+            }
+        json_step = json.dumps(nulled)
+        asyncio.run_coroutine_threadsafe(self._push(json_step),self._loop)
+
     def close(self):
         if not self.active or self._stop_event.is_set():
             print(f"{ER}[Client] Connection to nerimity must to be active to close.{RS}")
