@@ -71,8 +71,8 @@ TODO dodać opcję żeby wysłać puste dane client.clear() ????
 
 notable arguments:
 
-`link` - is the link that the user gets redirected to when clicking the title
-`imgSrc` - should be a valid link to an image
+`link` - is the link that the user gets redirected to when clicking the title   return
+`imgSrc` - should be a valid link to an image   return
 `startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence, both values need to be **unix timestamp in miliseconds**
 
 ## Client.close()
