@@ -34,4 +34,4 @@ time.sleep(1) # waits for the connection to fully close before finishing the pro
 # Reference
 To use neripresence you will need to create a Client() object:
 `client = neripresence.Client()`
-the client has 3 callable meth
+the client has 3 callable methods
