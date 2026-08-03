@@ -72,8 +72,9 @@ TODO dodać opcję żeby wysłać puste dane client.clear() ????
 notable arguments:
 
 `link` - is the link that the user gets redirected to when clicking the title  
-`imgSrc` - should be a valid link to an image  <br>
-`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence, both values need to be **unix timestamp in miliseconds**
+`imgSrc` - should be a valid link to an image  
+`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence,  
+both values need to be **unix timestamp in miliseconds**
 
 ## Client.close()
 This method is used to close the connection and free the socket
