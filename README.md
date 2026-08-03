@@ -1,3 +1,4 @@
+
 # Neripresence
 **A tiny wrapper for the nerimity desktop app :3**
 
@@ -16,6 +17,7 @@ To install neripresence you can use pip:
 **code examples that will help you get started**
 
 A very simple example program to set a static presence and close it after any user input:
+
 ```python
 import  neripresence  as  ns
 import  time
@@ -32,6 +34,45 @@ input("") # waits for user input to continue the program
 client.close() # closes the connection
 
 time.sleep(1) # waits for the connection to fully close before finishing the program
+```
+
+here is a bit more complex example, that sets the presence subtitle to a random mathematical equation  
+and title to its result :
+
+```python
+import  neripresence  as  ns
+from  time  import  sleep
+from  random  import  randint,choice
+
+client = ns.Client() # returns a client object
+
+client.start() # starts a connection with nerimity
+
+while  True: # infinite loop
+
+  try: # trying to run the program
+  # setting two random values and a operator
+    A = randint(1,100)
+    B = randint(1,100)
+    operator = choice(["+","-","*","/"])
+    
+    Expression = f"{A}{operator}{B}"  # combining the values and operator into one string
+    
+    print("Pushing new presence")
+    
+    # pushing data with title being the evaluated expression, and subtitle being the expression
+    client.push(action="Crunchin'",name="Numbers",title=eval(Expression),subtitle=Expression)
+    
+    sleep(3) # waiting for the socket to cool down
+  
+  # if something goes wrong or the user triggers ^C (keyboardInterrupt)
+  # make sure the connection is closed
+  except:
+  
+    client.close() # close the connection
+    sleep(1) # wait for the connection to close
+    break  # actually stop the loop
+
 ```
 
 # Reference
@@ -66,17 +107,17 @@ as per [nerimity docs](https://docs.nerimity.com/rpc) only the `name` argument i
   }
 }
 ```
-`TODO SCREEN Z WSZYSTKIMI WARTOSCIAMI`
-TODO dodać opcję żeby wysłać puste dane client.clear() ????
-
 notable arguments:
 
-`link` - is the link that the user gets redirected to when clicking the title  
-`imgSrc` - should be a valid link to an image  
-`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence,  
-both values need to be **unix timestamp in miliseconds**
+`link` - is the link that the user gets redirected to when clicking the title
+`imgSrc` - should be a valid link to an image
+`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence, both values need to be **unix timestamp in miliseconds**
+
+## Client.clear()
+This method is used to clear the presence without closing the connection
 
 ## Client.close()
 This method is used to close the connection and free the socket
 
 Good practice is to always make sure that the connection is properly closed before stopping the program, as that could lead to some connection issues later on.
+
