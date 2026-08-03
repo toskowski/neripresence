@@ -80,10 +80,7 @@ while  True: # infinite loop
 To use neripresence you will need to create a Client() object:
 `client = neripresence.Client()`
 
-The Client has 3 methods:
-```Client.start()```
-```Client.push()```
-```Client.close()```
+The Client methods are:
 
 ## Client.start()
 This method starts a websocket on another thread that listens for data from ```Client.push()``` .
