@@ -1,6 +1,8 @@
 # Neripresence
-A tiny wrapper for the nerimity desktop app :3
+**A tiny wrapper for the nerimity desktop app :3**
+
 this readme will contain a few examples and explenations for neripresence
+
 for suggestions or feedback please contact me on nerimity: @tosiek:tost
 
 # Installation
