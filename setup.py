@@ -2,12 +2,12 @@ from distutils.core import setup
 setup(
   name = 'neripresence',         
   packages = ['neripresence'],   
-  version = '0.3',      
+  version = '0.4',      
   license='MIT',        
-  description = 'Small and simple nerimity presence wrapper',   
+  description = 'Small and simple nerimity presence wrapper :3',   
   author = 'Tosiek',     
   url = 'https://github.com/toskowski/neripresence',   
-  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_03.tar.gz',    
+  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_04.tar.gz',    
   keywords = ['nerimity', 'presence' ],   
   install_requires=[            
           'websockets',
