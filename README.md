@@ -8,7 +8,7 @@ To install neripresence you can use pip:
 
 ```pip install --upgrade neripresence```
 
-or download and install from [this github repo](https://github.com/toskowski/neripresence)
+... or download and install from [this github repo](https://github.com/toskowski/neripresence)
 
 # Code examples:
 
