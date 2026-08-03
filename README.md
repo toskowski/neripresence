@@ -115,10 +115,10 @@ notable arguments:
 `startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence, both values need to be **unix timestamp in miliseconds**
 
 ## Client.clear()
-This method is used to clear the presence without closing the connection
+This method clears the presence without closing the connection
 
 ## Client.close()
-This method is used to close the connection and free the socket
+This method closes the connection and frees the socket
 
 Good practice is to always make sure that the connection is properly closed before stopping the program, as that could lead to some connection issues later on.
 
