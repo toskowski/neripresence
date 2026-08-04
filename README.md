@@ -109,8 +109,11 @@ notable arguments:
 
 `link` - is the link that the user gets redirected to when clicking the title  
 `imgSrc` - should be a valid link to an image  
-`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence,  
-both values need to be **unix timestamp in miliseconds**
+`startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence  
+`relative` - defaults to True changes how `startedAt` and `endsAt` work,  
+If `True` (default) time is set in seconds from current time  
+If `False` time set should be absolute and in unix milisecond timestamp format  
+
 
 ## Client.clear()
 This method clears the presence without closing the connection
