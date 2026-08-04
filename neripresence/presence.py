@@ -17,11 +17,21 @@ class Client():
         self._loop = asyncio.new_event_loop()
         self._thread = None
         self._stop_event = None
+        self.relative_warn = True
 
-    def push(self,name:str,link:str=None,action:str=None,title:str=None,subtitle:str=None,imgSrc:str=None,startedAt:int=None,endsAt:int=None):
+    def push(self,name:str,link:str=None,action:str=None,title:str=None,subtitle:str=None,imgSrc:str=None,startedAt:float|int=None,endsAt:float|int=None,relative:bool=True):
+        
         if not self.active:
             print(f"{ER}[Client] Connection to nerimity must to be active to push presence.{RS}")
             return
+
+        if relative:
+            if abs(startedAt) > 10000 or abs(endsAt) > 10000 and self.relative_warn:
+                print(f"{CY}[Client] While pushing, set time value exceeds 10000 seconds. Is this intended?\n[Client] If yes - you can omit this warning by setting Client.Relative_Warn to False \n[Client] If not - try setting the relative argument to False, and use absolute unix milisecond timestamp instead.{RS}")
+
+            current_time = time.time()
+            absStartedAt = int((current_time + startedAt) * 1000)
+            absEndsAt = int((current_time + endsAt) * 1000)
 
         data = {
             "name": name,
@@ -30,11 +40,13 @@ class Client():
             "title": title,
             "subtitle": subtitle,
             "imgSrc": imgSrc,
-            "startedAt": startedAt,
-            "endsAt": endsAt
+            "startedAt": absStartedAt,
+            "endsAt": absEndsAt
         }
 
-        clean_payload = {key: str(value) for key, value in data.items() if value is not None}
+        strings = {"name", "link", "action", "title", "subtitle", "imgSrc"}
+
+        clean_payload = {key: str(value) if key in strings else value for key, value in data.items() if value is not None}
         joined = {
             "name": 'UPDATE_RPC',
             "data": clean_payload
@@ -75,6 +87,7 @@ class Client():
 
     async def _push(self, data):
         try:
+            print(data)
             await self.wsock.send(data)
         except Exception as e:
             print(f"{ER}[Client] Err while pushing data: {e}{RS}")
@@ -107,10 +120,11 @@ class Client():
                 print(f"{ER}[Client] Asyncio.CancelledError in Client websocket - connection force closed?{RS}")
                 ws.close()
                 raise
+
             except ConnectionError:
                 pass
 
             except Exception as e:
                 print(e)
-                return
+                raise
         print(f"{ER}[Client] Couldn't connect to nerimity: No port responded. - Nerimity open?{RS}")
