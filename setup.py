@@ -11,7 +11,7 @@ setup(
   license='MIT',        
   description = 'Small and simple nerimity presence wrapper :3',
   long_description=long_description,
-  long_description_content_type='text/markdown'
+  long_description_content_type='text/markdown',
   author = 'Tosiek',     
   url = 'https://github.com/toskowski/neripresence',   
   download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_044.tar.gz',    
