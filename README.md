@@ -15,9 +15,9 @@ To install neripresence you can use pip:
 
 # Code examples:
 **code examples that will help you get started**
-
-A very simple example program to set a static presence and close it after any user input:
-
+  
+1. A very simple example program to set a static presence and close it after any user input:
+  
 ```python
 import  neripresence  as  ns
 import  time
@@ -35,10 +35,10 @@ client.close() # closes the connection
 
 time.sleep(1) # waits for the connection to fully close before finishing the program
 ```
-
-here is a bit more complex example, that sets the presence subtitle to a random mathematical equation  
-and title to its result :
-
+  
+2.here is a bit more complex example,  
+that sets the presence subtitle to a random mathematical equation and title to its result :
+  
 ```python
 import  neripresence  as  ns
 from  time  import  sleep
@@ -74,6 +74,36 @@ while  True: # infinite loop
     sleep(1) # wait for the connection to close
     break  # actually stop the loop
 
+```
+  
+3. this example sets a presence every 24 seconds with a 24 second long music progress bar
+  
+```python
+import  neripresence  as  ns
+from  time  import  sleep
+
+client = ns.Client() # returns a client object
+
+client.start() # starts a connection with nerimity
+
+while  True: # infinite loop
+
+  try: # trying to run the program
+    
+    print("Pushing new presence")
+    
+    # pushing data with a music progress bar that lasts for 24 seconds
+    client.push(action="Listening to",name="Music",title="Good Song",subtitle="Good Artist",startedAt=0,endsAt=24)
+    
+    sleep(24) # waiting a bit
+  
+  # if something goes wrong or the user triggers ^C (keyboardInterrupt)
+  # make sure the connection is closed
+  except:
+  
+    client.close() # close the connection
+    sleep(1) # wait for the connection to close
+    break  # actually stop the loop
 ```
 
 # Reference
@@ -111,8 +141,8 @@ notable arguments:
 `imgSrc` - should be a valid link to an image  
 `startedAt`/`endsAt` - used for displaying a bar showing the time progress of the presence  
 `relative` - defaults to True changes how `startedAt` and `endsAt` work,  
-If `True` (default) time is set in seconds from current time  
-If `False` time set should be absolute and in unix milisecond timestamp format  
+If `True` (default) time value is set in seconds from current time  
+If `False` set time value should be absolute and in unix milisecond timestamp format  
 
 
 ## Client.clear()
