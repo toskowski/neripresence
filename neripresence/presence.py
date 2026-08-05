@@ -87,7 +87,6 @@ class Client():
 
     async def _push(self, data):
         try:
-            print(data)
             await self.wsock.send(data)
         except Exception as e:
             print(f"{ER}[Client] Err while pushing data: {e}{RS}")
