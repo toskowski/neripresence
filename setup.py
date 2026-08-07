@@ -7,14 +7,14 @@ long_description = (this_directory / "README.md").read_text()
 setup(
   name = 'neripresence',         
   packages = ['neripresence'],   
-  version = '0.4.4',      
+  version = '0.4.5',      
   license='MIT',        
   description = 'Small and simple nerimity presence wrapper :3',
   long_description=long_description,
   long_description_content_type='text/markdown',
   author = 'Tosiek',     
   url = 'https://github.com/toskowski/neripresence',   
-  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_044.tar.gz',    
+  download_url = 'https://github.com/toskowski/neripresence/archive/refs/tags/v_045.tar.gz',    
   keywords = ['nerimity', 'presence' ],   
   install_requires=[            
           'websockets',
