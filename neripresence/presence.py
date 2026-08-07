@@ -23,8 +23,13 @@ class Client():
         
         if not self.active:
             print(f"{ER}[Client] Connection to nerimity must to be active to push presence.{RS}")
-            return
-
+            raise ConnectionError
+        
+        if (startedAt == None or endsAt == None):
+            relative = False
+            absStartedAt = None
+            absEndsAt = None
+        
         if relative:
             if abs(startedAt) > 10000 or abs(endsAt) > 10000 and self.relative_warn:
                 print(f"{CY}[Client] While pushing, set time value exceeds 10000 seconds. Is this intended?\n[Client] If yes - you can omit this warning by setting Client.Relative_Warn to False \n[Client] If not - try setting the relative argument to False, and use absolute unix milisecond timestamp instead.{RS}")
@@ -32,6 +37,7 @@ class Client():
             current_time = time.time()
             absStartedAt = int((current_time + startedAt) * 1000)
             absEndsAt = int((current_time + endsAt) * 1000)
+        
 
         data = {
             "name": name,
@@ -89,7 +95,10 @@ class Client():
         try:
             await self.wsock.send(data)
         except Exception as e:
-            print(f"{ER}[Client] Err while pushing data: {e}{RS}")
+            print(f"{ER}[Client_PUSH] Err while pushing data: {e}{RS}")
+            self.close()
+            time.sleep(1)
+            raise
 
     async def _close(self):
         if self._stop_event:
@@ -98,7 +107,7 @@ class Client():
 
     async def _websocket_connection(self):
         self._stop_event = asyncio.Event()
-        print(f"{CY}[Client] Trying to establish a websocket connection{RS}")
+        print(f"{CY}[Client_WSOCK] Trying to establish a websocket connection{RS}")
         for port in range(6463, 6473):
             url = f"ws://localhost:{port}/?appId=123455678987654321"
             try:
@@ -109,14 +118,14 @@ class Client():
                         continue
                     await ws.send('{"name":"HELLO_NERIMITY_RPC"}')
                     self.wsock = ws
-                    print(f"{GR}[Client] Websocket connection to nerimity active{RS}")
+                    print(f"{GR}[Client_WSOCK] Websocket connection to nerimity active{RS}")
                     self.active = True
                     await self._stop_event.wait()
-                    print(f"{GR}[Client] Websocket connection to nerimity closed{RS}")
+                    print(f"{GR}[Client_WSOCK] Websocket connection to nerimity closed{RS}")
                     self.active = False
                     return
             except asyncio.CancelledError:
-                print(f"{ER}[Client] Asyncio.CancelledError in Client websocket - connection force closed?{RS}")
+                print(f"{ER}[Client_WSOCK] Asyncio.CancelledError in Client websocket - connection force closed?{RS}")
                 ws.close()
                 raise
 
@@ -124,6 +133,7 @@ class Client():
                 pass
 
             except Exception as e:
-                print(e)
+                print(f"{ER}[Client_WSOCK]")
+                ws.close()
                 raise
-        print(f"{ER}[Client] Couldn't connect to nerimity: No port responded. - Nerimity open?{RS}")
+        print(f"{ER}[Client_WSOCK] Couldn't connect to nerimity: No port responded. - Nerimity open?{RS}")
